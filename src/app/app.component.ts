@@ -1,4 +1,6 @@
 import { Component, OnInit, HostListener } from "@angular/core";
+import { StarRatingComponent } from 'ng-starrating';
+
 import { LocationService } from "./core/location-service/location.service";
 import { NearestPlacesService } from "./core/nearest-places-service/nearest-places.service";
 import { Places, ResultsEntity } from "./models/Places.type";
@@ -28,11 +30,17 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.locationService.getPosition().then((pos) => {
-      console.log(`Positon: ${pos.lng} ${pos.lat}`);
+      // console.log(`Positon: ${pos.lng} ${pos.lat}`);
       this.lat = pos.lat;
       this.long = pos.lng;
       this.getRestaurants(this.lat, this.long);
     });
+    // this.locationService.getLocation().subscribe((loc) => {
+    //   console.log(loc.coords.latitude, loc.coords.longitude);
+    //   this.lat = loc.coords.latitude;
+    //   this.long = loc.coords.longitude;
+    //   this.getRestaurants(this.lat, this.long);
+    // });
   }
 
   @HostListener("window:scroll", ["$event"])
@@ -57,7 +65,12 @@ export class AppComponent implements OnInit {
     const filteredRestaurants: Places = { ...restaurants };
     // Add result.opening_hours.open_now below
     filteredRestaurants.results = restaurants.results
-      .filter((result) => result.business_status === "OPERATIONAL")
+      .filter(
+        (result) =>
+          result.business_status === "OPERATIONAL" &&
+          result.opening_hours &&
+          result.opening_hours.open_now
+      )
       .sort(
         (result, nextResult) =>
           nextResult.rating - result.rating ||

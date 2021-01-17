@@ -8,6 +8,17 @@
   <!-- <div *ngFor="let restaurant of filteredRestaurantsList"> -->
   <div class="content">
     <div class="name">{{ selectedRestaurant?.name }}</div>
+    <div>
+      <star-rating
+        [value]="selectedRestaurant?.rating.toString()"
+        totalstars="5"
+        checkedcolor="yellow"
+        uncheckedcolor="white"
+        size="24px"
+        readonly="false"
+      ></star-rating>
+      ({{ selectedRestaurant?.user_ratings_total }} reviews)
+    </div>
     <div [innerHTML]="selectedRestaurant?.photos[0]?.html_attributions"></div>
   </div>
   <img
