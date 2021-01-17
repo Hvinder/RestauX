@@ -19,7 +19,9 @@
       ></star-rating>
       ({{ selectedRestaurant?.user_ratings_total }} reviews)
     </div>
-    <div [innerHTML]="selectedRestaurant?.photos[0]?.html_attributions"></div>
+    <div>
+      <a [href]="selectedRestaurant?.url" target="_blank">TAKE ME THERE!</a>
+    </div>
   </div>
   <img
     [src]="photoUrl(selectedRestaurant?.photos[0]?.photo_reference)"
