@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
   width = window.innerWidth;
   lat: string;
   long: string;
+  xDown: number;
+  yPos: number;
 
   constructor(
     private nearestPlacesService: NearestPlacesService,
@@ -32,6 +34,18 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // start registering touch & swipe gestures
+    window.addEventListener(
+      "touchstart",
+      this.handleTouchStart.bind(this),
+      false
+    );
+    window.addEventListener(
+      "touchmove",
+      this.handleTouchMove.bind(this),
+      false
+    );
+
     this.locationService.getPosition().then((pos) => {
       this.lat = pos.lat;
       this.long = pos.lng;
@@ -107,6 +121,34 @@ export class AppComponent implements OnInit {
       this.selectedRestaurant = this.filteredRrestaurantList[
         this.selectedIndex
       ];
+    }
+  }
+
+  handleTouchStart(event): void {
+    // gets the initial horizontal touch position
+    this.xDown = event.touches[0].clientX;
+    this.yPos = event.touches[0].clientY;
+  }
+
+  handleTouchMove(event) {
+    if (this.xDown) {
+      const xUp = event.touches[0].clientX;
+      const yNewPos = event.touches[0].clientY;
+      // gets the total swipe length along the horizontal axis
+      const xDiff = this.xDown - xUp;
+      const yDiff = Math.abs(this.yPos - yNewPos);
+      // left and right swipe will be considered if user swipes vertically less than 100px
+      if (yDiff === 0 || Math.abs(xDiff) > yDiff) {
+        if (xDiff > 0) {
+          // left swipe
+          this.nextRestaurant();
+        } else {
+          // right swipe
+          this.previousRestaurant();
+        }
+      }
+      // reset initial touch position
+      this.xDown = null;
     }
   }
 }
