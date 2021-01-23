@@ -1,7 +1,20 @@
-<div *ngFor="let review of data?.reviews; let i = index" class="review">
-  <div class="author">
-    <img [src]="review?.profile_photo_url" class="profile-photo" />
-    <b>{{ review?.author_name }}</b>
+<div *ngFor="let review of data?.reviews; let i = index" class="review-list">
+  <div class="review-header">
+    <img [src]="review?.profile_photo_url" class="profile-pic" />
+    <div class="review-stats">
+      <div class="author">
+        <b>{{ review?.author_name }}</b>
+        <i>{{ review?.relative_time_description }}</i>
+      </div>
+      <star-rating
+        [value]="review?.rating.toString()"
+        totalstars="5"
+        checkedcolor="black"
+        uncheckedcolor="red"
+        size="12px"
+        readonly="false"
+      ></star-rating>
+    </div>
   </div>
   <p>{{ review?.text }}</p>
 </div>
