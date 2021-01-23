@@ -27,10 +27,20 @@
   flex-direction: column;
   justify-content: space-around;
   height: 30%;
-  font-family: 'Yusei Magic', sans-serif;
+  font-family: "Yusei Magic", sans-serif;
+  align-items: center;
 }
 .name {
   font-size: 36px;
+}
+.review-button {
+  border: 0;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  color: #fff;
+  background: #558;
+  font-family: "Yusei Magic", sans-serif;
 }
 .maps-link {
   color: #fff;

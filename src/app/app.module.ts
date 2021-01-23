@@ -12,10 +12,12 @@ import {
   MatProgressSpinnerModule,
   MatSidenavModule,
   MatToolbarModule,
+  MatBottomSheetModule,
 } from "@angular/material";
+import { BottomSheetComponent } from "./components/bottom-sheet/bottom-sheet.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, BottomSheetComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,8 +28,10 @@ import {
     MatToolbarModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatBottomSheetModule,
   ],
   providers: [],
+  entryComponents: [BottomSheetComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

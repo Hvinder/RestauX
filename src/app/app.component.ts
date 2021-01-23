@@ -1,7 +1,9 @@
 import { Component, OnInit, HostListener } from "@angular/core";
+import { MatBottomSheet } from "@angular/material";
 import { StarRatingComponent } from "ng-starrating";
 import { forkJoin } from "rxjs";
 import { filter, map, mergeMap } from "rxjs/operators";
+import { BottomSheetComponent } from "./components/bottom-sheet/bottom-sheet.component";
 
 import { LocationService } from "./core/location-service/location.service";
 import { NearestPlacesService } from "./core/nearest-places-service/nearest-places.service";
@@ -30,7 +32,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private nearestPlacesService: NearestPlacesService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private _bottomSheet: MatBottomSheet
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +64,7 @@ export class AppComponent implements OnInit {
 
   getRestaurants(lat: string, long: string): void {
     this.nearestPlacesService
-      .getPlaces(lat, long)
+      .getPlaces()
       .pipe(
         map((results) => results),
         mergeMap(({ results }) => {
@@ -122,6 +125,12 @@ export class AppComponent implements OnInit {
         this.selectedIndex
       ];
     }
+  }
+
+  openBottomSheet(): void {
+    this._bottomSheet.open(BottomSheetComponent, {
+      data: this.selectedRestaurant,
+    });
   }
 
   handleTouchStart(event): void {
