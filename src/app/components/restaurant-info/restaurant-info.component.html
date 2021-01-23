@@ -32,7 +32,11 @@
   <button (click)="nextRestaurant()" class="nav-button">&gt;</button>
 </div>
 <div>
-  <a [href]="selectedRestaurant?.url" target="_blank" class="maps-link"
+  <!-- <p class="address footer-text">{{ selectedRestaurant?.formatted_address }}</p> -->
+  <a
+    [href]="selectedRestaurant?.url"
+    target="_blank"
+    class="maps-link footer-text"
     >Open in Maps</a
   >
 </div>

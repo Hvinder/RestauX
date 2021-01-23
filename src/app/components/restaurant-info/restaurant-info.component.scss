@@ -47,12 +47,18 @@
   font-family: "Yusei Magic", sans-serif;
 }
 .maps-link {
-  color: #fff;
   text-decoration: none;
+  top: 95%;
+}
+.address {
+  top: 85%;
+}
+.footer-text {
+  color: #fff;
   width: 100%;
   position: absolute;
-  top: 95%;
   text-align: center;
+  font-family: "Yusei Magic", sans-serif;
 }
 .spinner {
   display: flex;
