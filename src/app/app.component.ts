@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   selectedIndex: number = 0;
   lat: string;
   long: string;
-  xDown: number;
+  xPos: number;
   yPos: number;
 
   constructor(
@@ -122,16 +122,16 @@ export class AppComponent implements OnInit {
 
   handleTouchStart(event): void {
     // gets the initial horizontal touch position
-    this.xDown = event.touches[0].clientX;
+    this.xPos = event.touches[0].clientX;
     this.yPos = event.touches[0].clientY;
   }
 
   handleTouchMove(event) {
-    if (this.xDown) {
-      const xUp = event.touches[0].clientX;
+    if (this.xPos) {
+      const xNewPos = event.touches[0].clientX;
       const yNewPos = event.touches[0].clientY;
       // gets the total swipe length along the horizontal axis
-      const xDiff = this.xDown - xUp;
+      const xDiff = this.xPos - xNewPos;
       const yDiff = Math.abs(this.yPos - yNewPos);
       // left and right swipe will be considered if user swipes vertically less than 100px
       if (yDiff === 0 || Math.abs(xDiff) > yDiff) {
@@ -144,7 +144,7 @@ export class AppComponent implements OnInit {
         }
       }
       // reset initial touch position
-      this.xDown = null;
+      this.xPos = null;
     }
   }
 }
