@@ -1,14 +1,12 @@
-import { Component, OnInit, HostListener } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MatBottomSheet } from "@angular/material";
-import { StarRatingComponent } from "ng-starrating";
 import { forkJoin } from "rxjs";
-import { filter, map, mergeMap } from "rxjs/operators";
+import { map, mergeMap } from "rxjs/operators";
 import { BottomSheetComponent } from "./components/bottom-sheet/bottom-sheet.component";
 
 import { LocationService } from "./core/location-service/location.service";
 import { NearestPlacesService } from "./core/nearest-places-service/nearest-places.service";
-import { Places, ResultsEntity } from "./models/Places.type";
-import { Result, Results } from "./models/Results.type";
+import { RestaurantDetail, RawRestaurantResponse } from "./models/Results.type";
 
 @Component({
   selector: "app-root",
@@ -17,14 +15,10 @@ import { Result, Results } from "./models/Results.type";
 })
 export class AppComponent implements OnInit {
   title = "RestauX";
-  API_KEY = "AIzaSyBORopmQV61I6to4mYy-4vM9jvxDoQAC-k";
-
-  restaurantList: Results[];
-  filteredRrestaurantList: Result[];
-  selectedRestaurant: Result;
+  restaurantList: RawRestaurantResponse[];
+  filteredRrestaurantList: RestaurantDetail[];
+  selectedRestaurant: RestaurantDetail;
   selectedIndex: number = 0;
-  height = window.innerHeight;
-  width = window.innerWidth;
   lat: string;
   long: string;
   xDown: number;
@@ -56,15 +50,9 @@ export class AppComponent implements OnInit {
     });
   }
 
-  @HostListener("window:scroll", ["$event"])
-  onWindowScroll($event) {
-    this.height = window.innerHeight;
-    this.width = window.innerWidth;
-  }
-
   getRestaurants(lat: string, long: string): void {
     this.nearestPlacesService
-      .getPlaces()
+      .getPlaces(lat, long)
       .pipe(
         map((results) => results),
         mergeMap(({ results }) => {
@@ -88,8 +76,10 @@ export class AppComponent implements OnInit {
       });
   }
 
-  filterRestaurants(restaurantList: Results[]): Result[] {
-    const filterdList: Results[] = [...restaurantList];
+  filterRestaurants(
+    restaurantList: RawRestaurantResponse[]
+  ): RestaurantDetail[] {
+    const filterdList: RawRestaurantResponse[] = [...restaurantList];
     return filterdList
       .map((data) => data.result)
       .filter(
@@ -105,9 +95,6 @@ export class AppComponent implements OnInit {
           nextResult.user_ratings_total - result.user_ratings_total
       );
   }
-
-  photoUrl = (ref) =>
-    `https://maps.googleapis.com/maps/api/place/photo?maxheight=823&photoreference=${ref}&key=${this.API_KEY}`;
 
   nextRestaurant() {
     if (this.selectedIndex <= this.filteredRrestaurantList.length - 2) {

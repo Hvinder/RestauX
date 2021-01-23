@@ -1,0 +1,67 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+.photo {
+  filter: brightness(0.3);
+  position: absolute;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+}
+.nav-button {
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  font-size: 48px;
+  font-weight: bolder;
+  background: #555;
+  opacity: 0.5;
+  filter: brightness(0.3);
+  align-self: center;
+}
+.content {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 35%;
+  font-family: "Yusei Magic", sans-serif;
+  align-items: center;
+}
+.name {
+  font-size: 36px;
+}
+.review-button {
+  border: 0;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  color: #fff;
+  background: #558;
+  font-family: "Yusei Magic", sans-serif;
+}
+.maps-link {
+  color: #fff;
+  text-decoration: none;
+  width: 100%;
+  position: absolute;
+  top: 95%;
+  text-align: center;
+}
+.spinner {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+.mat-icon {
+  color: #fff;
+}
+.mat-progress-spinner {
+  align-self: center;
+}

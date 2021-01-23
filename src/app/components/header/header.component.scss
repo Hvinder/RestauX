@@ -1,0 +1,19 @@
+.toolbar {
+  position: fixed;
+  z-index: 2;
+  background: transparent;
+  button {
+    background: transparent;
+    border: 0;
+  }
+}
+
+h1.app-name {
+  margin-left: 8px;
+}
+.app-name {
+  font-family: "Merienda", cursive;
+}
+.mat-icon {
+  color: #fff;
+}

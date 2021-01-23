@@ -1,15 +1,6 @@
-<div class="example-container" [class.example-is-mobile]="true">
-  <mat-toolbar color="primary" class="example-toolbar">
-    <button mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <h1 class="example-app-name">RestauX</h1>
-  </mat-toolbar>
-
-  <mat-sidenav-container
-    class="example-sidenav-container"
-    [style.marginTop.px]="56"
-  >
+<div class="app-container">
+  <app-header [title]="title" (toggle)="snav.toggle()"></app-header>
+  <mat-sidenav-container class="sidenav-container">
     <mat-sidenav
       #snav
       [mode]="'over'"
@@ -20,55 +11,12 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <div
-        style="text-align: center"
-        class="container"
-        [style.width.px]="width"
-        [style.height.px]="height"
-        *ngIf="selectedRestaurant; else spinner"
-      >
-        <button (click)="previousRestaurant()" class="nav-button">&lt;</button>
-        <!-- <div *ngFor="let restaurant of filteredRestaurantsList"> -->
-        <div class="content">
-          <div class="name">{{ selectedRestaurant?.name }}</div>
-          <div>
-            <star-rating
-              [value]="selectedRestaurant?.rating.toString()"
-              totalstars="5"
-              checkedcolor="yellow"
-              uncheckedcolor="white"
-              size="24px"
-              readonly="false"
-            ></star-rating>
-            ({{ selectedRestaurant?.user_ratings_total }} reviews)
-          </div>
-          <div>
-            <a
-              [href]="selectedRestaurant?.url"
-              target="_blank"
-              class="maps-link"
-              >Open in Maps</a
-            >
-          </div>
-          <button mat-flat-button color="primary" (click)="openBottomSheet()" class="review-button">
-            Reviews
-          </button>
-        </div>
-        <img
-          [src]="photoUrl(selectedRestaurant?.photos[0]?.photo_reference)"
-          [alt]="selectedRestaurant?.name"
-          class="photo"
-          [style.width.px]="width"
-          [style.height.px]="height"
-        />
-        <!-- </div> -->
-        <button (click)="nextRestaurant()" class="nav-button">&gt;</button>
-      </div>
-      <ng-template #spinner>
-        <div class="spinner">
-          <mat-spinner></mat-spinner>
-        </div>
-      </ng-template>
+      <app-restaurant-info
+        [selectedRestaurant]="selectedRestaurant"
+        (prevRestaurant)="previousRestaurant()"
+        (nxtRestaurant)="nextRestaurant()"
+        (bottomSheet)="openBottomSheet()"
+      ></app-restaurant-info>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

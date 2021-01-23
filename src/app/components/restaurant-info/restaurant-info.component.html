@@ -1,0 +1,43 @@
+<div class="container" *ngIf="selectedRestaurant; else spinner">
+  <button (click)="previousRestaurant()" class="nav-button">&lt;</button>
+  <div class="content">
+    <div class="name">{{ selectedRestaurant?.name }}</div>
+    <div>
+      <star-rating
+        [value]="selectedRestaurant?.rating.toString()"
+        totalstars="5"
+        checkedcolor="yellow"
+        uncheckedcolor="white"
+        size="24px"
+        readonly="false"
+      ></star-rating>
+      ({{ selectedRestaurant?.user_ratings_total }} reviews)
+    </div>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="openBottomSheet()"
+      class="review-button"
+    >
+      Reviews
+    </button>
+  </div>
+  <img
+    [src]="photoUrl(selectedRestaurant?.photos[0]?.photo_reference)"
+    [alt]="selectedRestaurant?.name"
+    class="photo"
+    [style.width.px]="width"
+    [style.height.px]="height"
+  />
+  <button (click)="nextRestaurant()" class="nav-button">&gt;</button>
+</div>
+<div>
+  <a [href]="selectedRestaurant?.url" target="_blank" class="maps-link"
+    >Open in Maps</a
+  >
+</div>
+<ng-template #spinner>
+  <div class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

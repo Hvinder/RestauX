@@ -15,9 +15,11 @@ import {
   MatBottomSheetModule,
 } from "@angular/material";
 import { BottomSheetComponent } from "./components/bottom-sheet/bottom-sheet.component";
+import { HeaderComponent } from './components/header/header.component';
+import { RestaurantInfoComponent } from './components/restaurant-info/restaurant-info.component';
 
 @NgModule({
-  declarations: [AppComponent, BottomSheetComponent],
+  declarations: [AppComponent, BottomSheetComponent, HeaderComponent, RestaurantInfoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

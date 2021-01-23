@@ -1,9 +1,9 @@
-export interface Results {
+export interface RawRestaurantResponse {
   html_attributions?: null[] | null;
-  result: Result;
+  result: RestaurantDetail;
   status: string;
 }
-export interface Result {
+export interface RestaurantDetail {
   address_components?: AddressComponentsEntity[] | null;
   adr_address: string;
   business_status: string;
