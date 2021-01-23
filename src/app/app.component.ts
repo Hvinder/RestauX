@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
   xPos: number;
   yPos: number;
 
+  isMobile: boolean;
+
   constructor(
     private nearestPlacesService: NearestPlacesService,
     private locationService: LocationService,
@@ -31,6 +33,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.checkUserAgent();
     // start registering touch & swipe gestures
     window.addEventListener(
       "touchstart",
@@ -48,6 +51,13 @@ export class AppComponent implements OnInit {
       this.long = pos.lng;
       this.getRestaurants(this.lat, this.long);
     });
+  }
+
+  checkUserAgent(): void {
+    const userAgent = navigator.userAgent;
+    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(
+      userAgent
+    );
   }
 
   getRestaurants(lat: string, long: string): void {
