@@ -26,8 +26,6 @@
     [src]="photoUrl(selectedRestaurant?.photos[0]?.photo_reference)"
     [alt]="selectedRestaurant?.name"
     class="photo"
-    [style.width.px]="width"
-    [style.height.px]="height"
   />
   <button (click)="nextRestaurant()" class="nav-button">&gt;</button>
 </div>

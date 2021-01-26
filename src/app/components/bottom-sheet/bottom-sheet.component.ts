@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from "@angular/material";
+import { MAT_BOTTOM_SHEET_DATA } from "@angular/material/bottom-sheet";
 import { RestaurantDetail } from "src/app/models/Results.type";
 
 @Component({

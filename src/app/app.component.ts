@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { MatBottomSheet } from "@angular/material";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { forkJoin } from "rxjs";
 import { map, mergeMap } from "rxjs/operators";
 import { BottomSheetComponent } from "./components/bottom-sheet/bottom-sheet.component";
