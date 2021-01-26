@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
 
   getRestaurants(lat: string, long: string): void {
     this.nearestPlacesService
-      .getPlaces(lat, long)
+      .getPlaces()
       .pipe(
         map((results) => results),
         mergeMap(({ results }) => {
